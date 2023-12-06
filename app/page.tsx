@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 // 必要なモジュールのインポート
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -10,9 +10,9 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
-} from 'recharts';
-import styles from './page.module.css'
+  ResponsiveContainer,
+} from "recharts";
+import styles from "./page.module.css";
 
 // 型定義
 type Prefecture = {
@@ -44,28 +44,38 @@ const fetchPrefCode = async (): Promise<Prefecture[]> => {
 };
 
 // 人口構成データを取得する関数
-const fetchPopulationComposition = async (pref: Prefecture): Promise<PrefecturePopulationData> => {
-  const response = await fetch(`/api/populationComposition?prefCode=${pref.prefCode}`);
+const fetchPopulationComposition = async (
+  pref: Prefecture,
+): Promise<PrefecturePopulationData> => {
+  const response = await fetch(
+    `/api/populationComposition?prefCode=${pref.prefCode}`,
+  );
   const data = await response.json();
   console.log(data); // データをログ出力
   return {
     prefName: pref.prefName,
     data: data.data,
-    boundaryYear: data.boundaryYear
+    boundaryYear: data.boundaryYear,
   };
 };
 
 // データ整形関数
-const formatPopulationDataForChart = (populationData: PrefecturePopulationData[]): any => {
+const formatPopulationDataForChart = (
+  populationData: PrefecturePopulationData[],
+): any => {
   const allYears = new Set<number>();
-  populationData.forEach(data => data.data[0].data.forEach(item => allYears.add(item.year)));
+  populationData.forEach((data) =>
+    data.data[0].data.forEach((item) => allYears.add(item.year)),
+  );
 
   const formattedData: any[] = [];
 
-  allYears.forEach(year => {
+  allYears.forEach((year) => {
     const yearData: any = { year };
-    populationData.forEach(pop => {
-      const popData = pop.data.find(d => d.label === "総人口")?.data.find(d => d.year === year);
+    populationData.forEach((pop) => {
+      const popData = pop.data
+        .find((d) => d.label === "総人口")
+        ?.data.find((d) => d.year === year);
       if (popData) {
         yearData[pop.prefName] = popData.value;
       }
@@ -78,14 +88,24 @@ const formatPopulationDataForChart = (populationData: PrefecturePopulationData[]
 
 // ランダムに色を変える関数
 const getRandomColor = () => {
-  const colors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#a4de6c', '#d0ed57', '#83a6ed'];
+  const colors = [
+    "#8884d8",
+    "#82ca9d",
+    "#ffc658",
+    "#ff7300",
+    "#a4de6c",
+    "#d0ed57",
+    "#83a6ed",
+  ];
   return colors[Math.floor(Math.random() * colors.length)];
 };
 
 // メインの処理
 export default function Home() {
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
-  const [selectedPrefectures, setSelectedPrefectures] = useState<PrefecturePopulationData[]>([]);
+  const [selectedPrefectures, setSelectedPrefectures] = useState<
+    PrefecturePopulationData[]
+  >([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,12 +115,17 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const handleCheckboxChange = async (event: React.ChangeEvent<HTMLInputElement>, pref: Prefecture) => {
+  const handleCheckboxChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+    pref: Prefecture,
+  ) => {
     if (event.target.checked) {
       const data = await fetchPopulationComposition(pref);
-      setSelectedPrefectures(prev => [...prev, data]);
+      setSelectedPrefectures((prev) => [...prev, data]);
     } else {
-      setSelectedPrefectures(prev => prev.filter(p => p.prefName !== pref.prefName));
+      setSelectedPrefectures((prev) =>
+        prev.filter((p) => p.prefName !== pref.prefName),
+      );
     }
   };
 
@@ -108,17 +133,18 @@ export default function Home() {
     <>
       <h1 className={styles.title}>日本の都道府県別人口構成</h1>
       <div className={styles.grid}>
-        {prefectures && prefectures.map(pref => (
-          <div key={pref.prefCode}>
-            <input
-              type="checkbox"
-              id={pref.prefName}
-              value={pref.prefCode}
-              onChange={(e) => handleCheckboxChange(e, pref)}
-            />
-            <label htmlFor={pref.prefName}>{pref.prefName}</label>
-          </div>
-        ))}
+        {prefectures &&
+          prefectures.map((pref) => (
+            <div key={pref.prefCode}>
+              <input
+                type="checkbox"
+                id={pref.prefName}
+                value={pref.prefCode}
+                onChange={(e) => handleCheckboxChange(e, pref)}
+              />
+              <label htmlFor={pref.prefName}>{pref.prefName}</label>
+            </div>
+          ))}
       </div>
       <ResponsiveContainer width="100%" height={400}>
         <LineChart
