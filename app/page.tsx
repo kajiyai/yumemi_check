@@ -60,7 +60,10 @@ const fetchPopulationComposition = async (
 };
 
 // データ整形関数
-const formatPopulationDataForChart = (populationData: PrefecturePopulationData[], selectedLabel: string): any => {
+const formatPopulationDataForChart = (
+  populationData: PrefecturePopulationData[],
+  selectedLabel: string,
+): any => {
   const allYears = new Set<number>();
   populationData.forEach((data) =>
     data.data[0].data.forEach((item) => allYears.add(item.year)),
@@ -70,8 +73,10 @@ const formatPopulationDataForChart = (populationData: PrefecturePopulationData[]
 
   allYears.forEach((year) => {
     const yearData: any = { year };
-    populationData.forEach(pop => {
-      const popData = pop.data.find(d => d.label === selectedLabel)?.data.find(d => d.year === year);
+    populationData.forEach((pop) => {
+      const popData = pop.data
+        .find((d) => d.label === selectedLabel)
+        ?.data.find((d) => d.year === year);
       if (popData) {
         yearData[pop.prefName] = popData.value;
       }
@@ -99,7 +104,9 @@ const getRandomColor = () => {
 // メインの処理
 export default function Home() {
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
-  const [selectedPrefectures, setSelectedPrefectures] = useState<PrefecturePopulationData[]>([]);
+  const [selectedPrefectures, setSelectedPrefectures] = useState<
+    PrefecturePopulationData[]
+  >([]);
   const [selectedLabel, setSelectedLabel] = useState<string>("総人口");
 
   useEffect(() => {
@@ -142,7 +149,11 @@ export default function Home() {
           ))}
       </div>
       <div className="selectContainer">
-        <select className="selectBox" value={selectedLabel} onChange={(e) => setSelectedLabel(e.target.value)}>
+        <select
+          className="selectBox"
+          value={selectedLabel}
+          onChange={(e) => setSelectedLabel(e.target.value)}
+        >
           <option value="総人口">総人口</option>
           <option value="年少人口">年少人口</option>
           <option value="生産年齢人口">生産年齢人口</option>
@@ -151,7 +162,10 @@ export default function Home() {
       </div>
       <ResponsiveContainer width="100%" height={400}>
         <LineChart
-          data={formatPopulationDataForChart(selectedPrefectures, selectedLabel)}
+          data={formatPopulationDataForChart(
+            selectedPrefectures,
+            selectedLabel,
+          )}
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
