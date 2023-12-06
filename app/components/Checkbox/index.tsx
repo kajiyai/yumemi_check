@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './styles.module.css'
 
 type CheckboxProps = {
     id: string;
@@ -15,6 +16,7 @@ const CheckBox: React.FC<CheckboxProps> = ({ id, value, label, handleCheckboxCha
                 id={id}
                 value={value}
                 onChange={handleCheckboxChange}
+                className={styles.checkbox}
             />
             <label htmlFor={id}>{label}</label>
         </div>
