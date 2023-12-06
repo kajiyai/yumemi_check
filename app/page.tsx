@@ -1,66 +1,17 @@
 "use client";
 
 // 必要なモジュールのインポート
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./page.module.css";
-import { Prefecture, PrefecturePopulationData } from '../utils/type';
 import CheckBox from "./components/CheckBox";
 import SelectBox from "./components/SelectBox";
 import CustomLineChart from './components/LineChart';
-
-
-// 都道府県コードを取得する関数
-const fetchPrefCode = async (): Promise<Prefecture[]> => {
-  const response = await fetch("/api/prefectures");
-  const data = await response.json();
-  return data;
-};
-
-// 人口構成データを取得する関数
-const fetchPopulationComposition = async (
-  pref: Prefecture,
-): Promise<PrefecturePopulationData> => {
-  const response = await fetch(
-    `/api/populationComposition?prefCode=${pref.prefCode}`,
-  );
-  const data = await response.json();
-  console.log(data); // データをログ出力
-  return {
-    prefName: pref.prefName,
-    data: data.data,
-    boundaryYear: data.boundaryYear,
-  };
-};
+import { usePrefectureData } from './hooks/usePrefectureData';
 
 // メインの処理
 export default function Home() {
-  const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
-  const [selectedPrefectures, setSelectedPrefectures] = useState<
-    PrefecturePopulationData[]
-  >([]);
+  const { prefectures, selectedPrefectures, handleCheckboxChange } = usePrefectureData();
   const [selectedLabel, setSelectedLabel] = useState<string>("総人口");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const prefs = await fetchPrefCode();
-      setPrefectures(prefs);
-    };
-    fetchData();
-  }, []);
-
-  const handleCheckboxChange = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-    pref: Prefecture,
-  ) => {
-    if (event.target.checked) {
-      const data = await fetchPopulationComposition(pref);
-      setSelectedPrefectures((prev) => [...prev, data]);
-    } else {
-      setSelectedPrefectures((prev) =>
-        prev.filter((p) => p.prefName !== pref.prefName),
-      );
-    }
-  };
 
   return (
     <>
