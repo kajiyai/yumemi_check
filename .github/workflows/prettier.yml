@@ -1,0 +1,12 @@
+name: Prettier
+on: [pull_request]
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: prettier
+        uses: creyD/prettier_action@v4.0
+        with:
+          github_token: ${{ secrets.github_token }}
+          prettier_flags: "--check ."
