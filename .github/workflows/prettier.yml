@@ -1,12 +1,20 @@
 name: Prettier
 on: [pull_request]
+
+env:
+  FILE_PATTERN: "app/*.{ts,tsx}"
+
 jobs:
-  prettier:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: prettier
-        uses: creyD/prettier_action@v4.0
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
-          github_token: ${{ secrets.github_token }}
-          prettier_options: "--check ."
+          node-version: 12.x
+      - name: Run Prettier
+        run: |
+          npx prettier --write ${FILE_PATTERN}
+      - uses: stefanzweifel/git-auto-commit-action@v3.0.0
+        with:
+          commit_message: Apply Prettier Change
