@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './styles.module.css';
 
 type CheckboxProps = {
     id: string;
@@ -8,7 +7,7 @@ type CheckboxProps = {
     handleCheckboxChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Checkbox: React.FC<CheckboxProps> = ({ id, value, label, handleCheckboxChange }) => {
+const CheckBox: React.FC<CheckboxProps> = ({ id, value, label, handleCheckboxChange }) => {
     return (
         <div>
             <input
@@ -22,4 +21,4 @@ const Checkbox: React.FC<CheckboxProps> = ({ id, value, label, handleCheckboxCha
     );
 };
 
-export default Checkbox;
+export default CheckBox;

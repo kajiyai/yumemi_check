@@ -14,7 +14,7 @@ import {
 } from "recharts";
 import styles from "./page.module.css";
 import { Prefecture, PrefecturePopulationData } from '../utils/type';
-import Checkbox from "./components/Checkbox";
+import CheckBox from "./components/CheckBox";
 
 
 // 都道府県コードを取得する関数
@@ -118,7 +118,7 @@ export default function Home() {
       <div className={styles.grid}>
         {prefectures &&
           prefectures.map((pref) => (
-            <Checkbox
+            <CheckBox
               key={pref.prefName}
               id={pref.prefName}
               value={pref.prefCode}
