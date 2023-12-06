@@ -1,3 +1,4 @@
+import styles from "./styles.module.css"
 
 type SelectBoxProps = {
     selectedLabel: string;
@@ -6,9 +7,9 @@ type SelectBoxProps = {
 
 const SelectBox: React.FC<SelectBoxProps> = ({ selectedLabel, setSelectedLabel }) => {
     return (
-        <div className="selectContainer">
+        <div className={styles.selectContainer}>
             <select
-                className="selectBox"
+                className={styles.selectBox}
                 value={selectedLabel}
                 onChange={(e) => setSelectedLabel(e.target.value)}
             >
