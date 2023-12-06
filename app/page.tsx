@@ -14,6 +14,7 @@ import {
 } from "recharts";
 import styles from "./page.module.css";
 import { Prefecture, PrefecturePopulationData } from '../utils/type';
+import Checkbox from "./components/Checkbox";
 
 
 // 都道府県コードを取得する関数
@@ -117,15 +118,13 @@ export default function Home() {
       <div className={styles.grid}>
         {prefectures &&
           prefectures.map((pref) => (
-            <div key={pref.prefCode}>
-              <input
-                type="checkbox"
-                id={pref.prefName}
-                value={pref.prefCode}
-                onChange={(e) => handleCheckboxChange(e, pref)}
-              />
-              <label htmlFor={pref.prefName}>{pref.prefName}</label>
-            </div>
+            <Checkbox
+              key={pref.prefName}
+              id={pref.prefName}
+              value={pref.prefCode}
+              label={pref.prefName}
+              handleCheckboxChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckboxChange(e, pref)}
+            />
           ))}
       </div>
       <div className="selectContainer">
