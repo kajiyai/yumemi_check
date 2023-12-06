@@ -15,6 +15,7 @@ import {
 import styles from "./page.module.css";
 import { Prefecture, PrefecturePopulationData } from '../utils/type';
 import CheckBox from "./components/CheckBox";
+import SelectBox from "./components/SelectBox";
 
 
 // 都道府県コードを取得する関数
@@ -127,18 +128,7 @@ export default function Home() {
             />
           ))}
       </div>
-      <div className="selectContainer">
-        <select
-          className="selectBox"
-          value={selectedLabel}
-          onChange={(e) => setSelectedLabel(e.target.value)}
-        >
-          <option value="総人口">総人口</option>
-          <option value="年少人口">年少人口</option>
-          <option value="生産年齢人口">生産年齢人口</option>
-          <option value="老年人口">老年人口</option>
-        </select>
-      </div>
+      <SelectBox selectedLabel={selectedLabel} setSelectedLabel={setSelectedLabel} />
       <ResponsiveContainer width="100%" height={400}>
         <LineChart
           data={formatPopulationDataForChart(
