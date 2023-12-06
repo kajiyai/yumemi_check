@@ -13,28 +13,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import styles from "./page.module.css";
+import { Prefecture, PrefecturePopulationData } from '../utils/type';
 
-// 型定義
-type Prefecture = {
-  prefCode: number;
-  prefName: string;
-};
-
-type PopulationComposition = {
-  year: number;
-  value: number;
-};
-
-type PopulationData = {
-  label: string;
-  data: PopulationComposition[];
-};
-
-type PrefecturePopulationData = {
-  prefName: string;
-  data: PopulationData[];
-  boundaryYear: number;
-};
 
 // 都道府県コードを取得する関数
 const fetchPrefCode = async (): Promise<Prefecture[]> => {
