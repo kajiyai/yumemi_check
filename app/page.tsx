@@ -5,12 +5,13 @@ import React, { useState } from "react";
 import styles from "./page.module.css";
 import CheckBox from "./components/CheckBox";
 import SelectBox from "./components/SelectBox";
-import CustomLineChart from './components/LineChart';
-import { usePrefectureData } from './hooks/usePrefectureData';
+import CustomLineChart from "./components/LineChart";
+import { usePrefectureData } from "./hooks/usePrefectureData";
 
 // メインの処理
 export default function Home() {
-  const { prefectures, selectedPrefectures, handleCheckboxChange } = usePrefectureData();
+  const { prefectures, selectedPrefectures, handleCheckboxChange } =
+    usePrefectureData();
   const [selectedLabel, setSelectedLabel] = useState<string>("総人口");
 
   return (
@@ -24,12 +25,20 @@ export default function Home() {
               id={pref.prefName}
               value={pref.prefCode}
               label={pref.prefName}
-              handleCheckboxChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckboxChange(e, pref)}
+              handleCheckboxChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleCheckboxChange(e, pref)
+              }
             />
           ))}
       </div>
-      <SelectBox selectedLabel={selectedLabel} setSelectedLabel={setSelectedLabel} />
-      <CustomLineChart selectedPrefectures={selectedPrefectures} selectedLabel={selectedLabel} />
+      <SelectBox
+        selectedLabel={selectedLabel}
+        setSelectedLabel={setSelectedLabel}
+      />
+      <CustomLineChart
+        selectedPrefectures={selectedPrefectures}
+        selectedLabel={selectedLabel}
+      />
     </>
   );
 }
