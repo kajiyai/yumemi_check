@@ -2,16 +2,6 @@
 
 // 必要なモジュールのインポート
 import React, { useEffect, useState } from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
 import styles from "./page.module.css";
 import { Prefecture, PrefecturePopulationData } from '../utils/type';
 import CheckBox from "./components/CheckBox";
