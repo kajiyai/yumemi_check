@@ -56,7 +56,7 @@ const fetchPopulationComposition = async (pref: Prefecture): Promise<PrefectureP
 };
 
 // データ整形関数
-const formatPopulationDataForChart = (populationData: PrefecturePopulationData[]): any => {
+const formatPopulationDataForChart = (populationData: PrefecturePopulationData[], selectedLabel: string): any => {
   const allYears = new Set<number>();
   populationData.forEach(data => data.data[0].data.forEach(item => allYears.add(item.year)));
 
@@ -65,7 +65,7 @@ const formatPopulationDataForChart = (populationData: PrefecturePopulationData[]
   allYears.forEach(year => {
     const yearData: any = { year };
     populationData.forEach(pop => {
-      const popData = pop.data.find(d => d.label === "総人口")?.data.find(d => d.year === year);
+      const popData = pop.data.find(d => d.label === selectedLabel)?.data.find(d => d.year === year);
       if (popData) {
         yearData[pop.prefName] = popData.value;
       }
@@ -86,6 +86,7 @@ const getRandomColor = () => {
 export default function Home() {
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
   const [selectedPrefectures, setSelectedPrefectures] = useState<PrefecturePopulationData[]>([]);
+  const [selectedLabel, setSelectedLabel] = useState<string>("総人口");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,9 +121,17 @@ export default function Home() {
           </div>
         ))}
       </div>
+      <div className="selectContainer">
+        <select className="selectBox" value={selectedLabel} onChange={(e) => setSelectedLabel(e.target.value)}>
+          <option value="総人口">総人口</option>
+          <option value="年少人口">年少人口</option>
+          <option value="生産年齢人口">生産年齢人口</option>
+          <option value="老年人口">老年人口</option>
+        </select>
+      </div>
       <ResponsiveContainer width="100%" height={400}>
         <LineChart
-          data={formatPopulationDataForChart(selectedPrefectures)}
+          data={formatPopulationDataForChart(selectedPrefectures, selectedLabel)}
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
