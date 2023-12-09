@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './styles.module.css'
 
 type CheckboxProps = {
@@ -9,17 +9,24 @@ type CheckboxProps = {
 };
 
 const CheckBox: React.FC<CheckboxProps> = ({ id, value, label, handleCheckboxChange }) => {
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setIsChecked(event.target.checked);
+        handleCheckboxChange(event);
+    };
+
     return (
-        <div>
+        <label className={`${styles.checkboxContainer} ${isChecked ? styles.checked : ''}`}>
             <input
                 type="checkbox"
                 id={id}
                 value={value}
-                onChange={handleCheckboxChange}
+                onChange={handleChange}
                 className={styles.checkbox}
             />
-            <label htmlFor={id}>{label}</label>
-        </div>
+            <span>{label}</span>
+        </label>
     );
 };
 
