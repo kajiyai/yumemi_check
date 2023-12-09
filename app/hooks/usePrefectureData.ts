@@ -28,11 +28,14 @@ export const usePrefectureData = () => {
   const [selectedPrefectures, setSelectedPrefectures] = useState<
     PrefecturePopulationData[]
   >([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const prefs = await fetchPrefCode();
       setPrefectures(prefs);
+      setIsLoading(false);
     };
     fetchData();
   }, []);
@@ -51,5 +54,5 @@ export const usePrefectureData = () => {
     }
   };
 
-  return { prefectures, selectedPrefectures, handleCheckboxChange };
+  return { prefectures, selectedPrefectures, handleCheckboxChange, isLoading };
 };
