@@ -16,7 +16,7 @@
 }
 
 .checkboxContainer.checked:hover {
-  background-color: lightgreen; /* 選択時のホバー時の背景色 */
+  background-color: #008000; /* 選択時のホバー時の背景色 */
 }
 
 .checkboxContainer input {
