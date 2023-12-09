@@ -1,6 +1,6 @@
 .checkboxContainer {
   display: inline-block;
-  width: 100px; /* ボタンの幅 */
+  width: 120px; /* ボタンの幅 */
   height: 50px; /* ボタンの高さ */
   padding: 10px 20px;
   border: 1px solid gray;
