@@ -15,35 +15,35 @@ export default function Home() {
     usePrefectureData();
   const [selectedLabel, setSelectedLabel] = useState<string>("総人口");
 
-  if (isLoading) {
-    return <SkeletonScreen />;
-  } else {
-    return (
-      <>
-        <h1 className={styles.title}>日本の都道府県別人口構成</h1>
-        <div className={styles.grid}>
-          {prefectures &&
-            prefectures.map((pref) => (
-              <CheckBox
-                key={pref.prefName}
-                id={pref.prefName}
-                value={pref.prefCode}
-                label={pref.prefName}
-                handleCheckboxChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleCheckboxChange(e, pref)
-                }
-              />
-            ))}
-        </div>
-        <SelectBox
-          selectedLabel={selectedLabel}
-          setSelectedLabel={setSelectedLabel}
-        />
-        <CustomLineChart
-          selectedPrefectures={selectedPrefectures}
-          selectedLabel={selectedLabel}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <h1 className={styles.title}>日本の都道府県別人口構成</h1>
+      {isLoading ? <SkeletonScreen /> : (
+        <>
+          <div className={styles.grid}>
+            {prefectures &&
+              prefectures.map((pref) => (
+                <CheckBox
+                  key={pref.prefName}
+                  id={pref.prefName}
+                  value={pref.prefCode}
+                  label={pref.prefName}
+                  handleCheckboxChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleCheckboxChange(e, pref)
+                  }
+                />
+              ))}
+          </div>
+          <SelectBox
+            selectedLabel={selectedLabel}
+            setSelectedLabel={setSelectedLabel}
+          />
+          <CustomLineChart
+            selectedPrefectures={selectedPrefectures}
+            selectedLabel={selectedLabel}
+          />
+        </>
+      )}
+    </>
+  );
 }

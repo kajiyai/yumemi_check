@@ -6,10 +6,9 @@ const SkeletonScreen: React.FC = () => {
     <div className={styles.skeletonContainer}>
       <div className={styles.skeletonCheckbox}>
         {/* チェックボックスのスケルトン */}
-        <div className={styles.skeletonElement}></div>
-        <div className={styles.skeletonElement}></div>
-        <div className={styles.skeletonElement}></div>
-        {/* ... */}
+        {Array.from({ length: 30 }).map((_, i) => (
+          <div key={i} className={styles.skeletonElement}></div>
+        ))}
       </div>
       <div className={styles.skeletonSelect}>
         {/* セレクトボックスのスケルトン */}
