@@ -10,10 +10,10 @@ const fetchPrefCode = async (): Promise<Prefecture[]> => {
 
 // 人口構成データを取得する関数
 const fetchPopulationComposition = async (
-  pref: Prefecture
+  pref: Prefecture,
 ): Promise<PrefecturePopulationData> => {
   const response = await fetch(
-    `/api/populationComposition?prefCode=${pref.prefCode}`
+    `/api/populationComposition?prefCode=${pref.prefCode}`,
   );
   const data = await response.json();
   return {
@@ -42,14 +42,14 @@ export const usePrefectureData = () => {
 
   const handleCheckboxChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
-    pref: Prefecture
+    pref: Prefecture,
   ) => {
     if (event.target.checked) {
       const data = await fetchPopulationComposition(pref);
       setSelectedPrefectures((prev) => [...prev, data]);
     } else {
       setSelectedPrefectures((prev) =>
-        prev.filter((p) => p.prefName !== pref.prefName)
+        prev.filter((p) => p.prefName !== pref.prefName),
       );
     }
   };
