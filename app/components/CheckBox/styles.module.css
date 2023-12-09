@@ -8,6 +8,7 @@
   color: white;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
 }
 
 .checkboxContainer input {
