@@ -6,15 +6,20 @@ type CheckboxProps = {
     value: number;
     label: string;
     handleCheckboxChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    isLoading?: boolean;  // 新しいプロパティ
 };
 
-const CheckBox: React.FC<CheckboxProps> = ({ id, value, label, handleCheckboxChange }) => {
+const CheckBox: React.FC<CheckboxProps> = ({ id, value, label, handleCheckboxChange, isLoading }) => {
     const [isChecked, setIsChecked] = useState(false);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(event.target.checked);
         handleCheckboxChange(event);
     };
+
+    if (isLoading) {
+        return <div className={styles.skeletonCheckbox}></div>;  // スケルトン表示
+      }
 
     return (
         <label className={`${styles.checkboxContainer} ${isChecked ? styles.checked : ''}`}>
