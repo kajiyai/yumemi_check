@@ -12,8 +12,8 @@ import {
 import { PrefecturePopulationData } from "../../../utils/type";
 
 type LineChartProps = {
-    selectedPrefectures: PrefecturePopulationData[];
-    selectedLabel: string;
+  selectedPrefectures: PrefecturePopulationData[];
+  selectedLabel: string;
 };
 
 // データ整形関数
@@ -58,30 +58,33 @@ const getRandomColor = () => {
   return colors[Math.floor(Math.random() * colors.length)];
 };
 
-const CustomLineChart: React.FC<LineChartProps> = ({ selectedPrefectures, selectedLabel }) => {
-    return (
-        <ResponsiveContainer width="100%" height={400}>
-            <LineChart
-                data={formatPopulationDataForChart(selectedPrefectures, selectedLabel)}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="year" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                {selectedPrefectures.map((pref, index) => (
-                    <Line
-                        key={index}
-                        type="monotone"
-                        dataKey={pref.prefName}
-                        stroke={getRandomColor()}
-                        activeDot={{ r: 8 }}
-                    />
-                ))}
-            </LineChart>
-        </ResponsiveContainer>
-    );
+const CustomLineChart: React.FC<LineChartProps> = ({
+  selectedPrefectures,
+  selectedLabel,
+}) => {
+  return (
+    <ResponsiveContainer width="100%" height={400}>
+      <LineChart
+        data={formatPopulationDataForChart(selectedPrefectures, selectedLabel)}
+        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="year" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        {selectedPrefectures.map((pref, index) => (
+          <Line
+            key={index}
+            type="monotone"
+            dataKey={pref.prefName}
+            stroke={getRandomColor()}
+            activeDot={{ r: 8 }}
+          />
+        ))}
+      </LineChart>
+    </ResponsiveContainer>
+  );
 };
 
 export default CustomLineChart;
