@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## プロジェクト概要
+- **プロジェクト名**: 都道府県別の人口推移グラフSPA
+- **目的**: フロントエンドコーディングの試験プロジェクト
+- **関連リンク**: [フロントエンドコーディング試験](https://www.notion.so/0e9ef27b55704d7882aab55cc86c999d?pvs=21)
+- **使用API**:
+  - 都道府県一覧: [RESAS API](https://opendata.resas-portal.go.jp/docs/api/v1/prefectures.html)
+  - 人口構成: [RESAS API](https://opendata.resas-portal.go.jp/docs/api/v1/population/composition/perYear.html)
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 進捗状況の要約
+### やったこと
+1. **初期実装**: 約3日
+   - 基本的な実装開始。
+2. **要件定義と設定**: 1日
+   - 要件の再定義、Vercel、GitHub、CI/CDの設定。
+3. **実装フェーズ1**: 2日
+   - 追加の実装作業。
+4. **テストの作成**: 1日
+   - テストコードの記述。
+5. **実装フェーズ2**: 2日
+   - さらなる実装作業。
+6. **最終チェック**: 1日
+   - 最終的なチェックと調整。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### できなかったこと
+- 全体のレイアウト調整
+- チャートのソート機能
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### できたこと
+- **コンポーネントの分割**: ディレクトリ構造を整理し、コンポーネント化を進める。
+- **UIの調整**: チェックボックスの当たり判定、ホバー時の挙動などのUI改善。
+- **テストとCI/CD**: 公式ドキュメントを参考にテストのセットアップ、CI/CDの構築。
+- **ステート管理**: チェックボックスの状態管理に関する実装。
+- **コードのクリーンアップ**: LinterやPrettierの設定。
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 各日の作業時間
+- **2023年12月10日**: 2時間
+- **2023年12月9日**: 5時間
+- **2023年12月7日**: 6時間
+- **2023年12月6日**: 5時間
+- **2023年12月4日**: 2時間
+- **2023年11月30日**: 3時間
+- **2023年11月29日**: 約1時間
+- **2023年11月28日**: 約5時間
