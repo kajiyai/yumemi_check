@@ -36,9 +36,9 @@ export default function Home() {
                 id={pref.prefName}
                 value={pref.prefCode}
                 label={pref.prefName}
-                handleCheckboxChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleCheckboxChange(e, pref)
-                }
+                handleCheckboxChange={(
+                  e: React.ChangeEvent<HTMLInputElement>,
+                ) => handleCheckboxChange(e, pref)}
                 isLoading={isLoading}
               />
             ))}
@@ -47,19 +47,19 @@ export default function Home() {
         selectedLabel={selectedLabel}
         setSelectedLabel={setSelectedLabel}
       />
-      {isLoading
-        ? <CustomLineChart
-            selectedPrefectures={[]}
-            selectedLabel={""}
-            isLoading={isLoading}
-          />
-        : <CustomLineChart
-            selectedPrefectures={selectedPrefectures}
-            selectedLabel={selectedLabel}
-            isLoading={isLoading}
-          />
-      }
+      {isLoading ? (
+        <CustomLineChart
+          selectedPrefectures={[]}
+          selectedLabel={""}
+          isLoading={isLoading}
+        />
+      ) : (
+        <CustomLineChart
+          selectedPrefectures={selectedPrefectures}
+          selectedLabel={selectedLabel}
+          isLoading={isLoading}
+        />
+      )}
     </>
-
   );
 }
