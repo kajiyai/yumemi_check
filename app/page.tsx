@@ -20,46 +20,37 @@ export default function Home() {
       <div className={styles.grid}>
         {isLoading
           ? Array.from({ length: 30 }).map((_, i) => (
-              <CheckBox
-                key={i}
-                id={`skeleton${i}`}
-                value={i}
-                label={`skeleton${i}`}
-                handleCheckboxChange={() => {}}
-                isLoading={isLoading}
-              />
-            ))
+            <CheckBox
+              key={i}
+              id={`skeleton${i}`}
+              value={i}
+              label={`skeleton${i}`}
+              handleCheckboxChange={() => { }}
+              isLoading={isLoading}
+            />
+          ))
           : prefectures &&
-            prefectures.map((pref) => (
-              <CheckBox
-                key={pref.prefName}
-                id={pref.prefName}
-                value={pref.prefCode}
-                label={pref.prefName}
-                handleCheckboxChange={(
-                  e: React.ChangeEvent<HTMLInputElement>,
-                ) => handleCheckboxChange(e, pref)}
-                isLoading={isLoading}
-              />
-            ))}
+          prefectures.map((pref) => (
+            <CheckBox
+              key={pref.prefName}
+              id={pref.prefName}
+              value={pref.prefCode}
+              label={pref.prefName}
+              handleCheckboxChange={(
+                e: React.ChangeEvent<HTMLInputElement>,
+              ) => handleCheckboxChange(e, pref)}
+              isLoading={isLoading}
+            />
+          ))}
       </div>
       <SelectBox
         selectedLabel={selectedLabel}
         setSelectedLabel={setSelectedLabel}
       />
-      {isLoading ? (
-        <CustomLineChart
-          selectedPrefectures={[]}
-          selectedLabel={""}
-          isLoading={isLoading}
-        />
-      ) : (
-        <CustomLineChart
-          selectedPrefectures={selectedPrefectures}
-          selectedLabel={selectedLabel}
-          isLoading={isLoading}
-        />
-      )}
+      <CustomLineChart
+        selectedPrefectures={selectedPrefectures}
+        selectedLabel={selectedLabel}
+      />
     </>
   );
 }
