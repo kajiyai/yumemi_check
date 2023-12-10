@@ -14,7 +14,6 @@ import { PrefecturePopulationData } from '../../../utils/type';
 type LineChartProps = {
     selectedPrefectures: PrefecturePopulationData[];
     selectedLabel: string;
-    isLoading: boolean;
 };
 
 // データ整形関数
@@ -59,11 +58,7 @@ const getRandomColor = () => {
     return colors[Math.floor(Math.random() * colors.length)];
 };
 
-const CustomLineChart: React.FC<LineChartProps> = ({ selectedPrefectures = [], selectedLabel = "", isLoading }) => {
-    if (isLoading) {
-        return <div className="skeletonChart"></div>;
-    }
-
+const CustomLineChart: React.FC<LineChartProps> = ({ selectedPrefectures, selectedLabel }) => {
     return (
         <ResponsiveContainer width="100%" height={400}>
             <LineChart
