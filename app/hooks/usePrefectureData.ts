@@ -10,10 +10,10 @@ const fetchPrefCode = async (): Promise<Prefecture[]> => {
 
 // 人口構成データを取得する関数
 const fetchPopulationComposition = async (
-  pref: Prefecture
+  pref: Prefecture,
 ): Promise<PrefecturePopulationData> => {
   const response = await fetch(
-    `/api/populationComposition?prefCode=${pref.prefCode}`
+    `/api/populationComposition?prefCode=${pref.prefCode}`,
   );
   const data = await response.json();
   return {
@@ -28,28 +28,31 @@ export const usePrefectureData = () => {
   const [selectedPrefectures, setSelectedPrefectures] = useState<
     PrefecturePopulationData[]
   >([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const prefs = await fetchPrefCode();
       setPrefectures(prefs);
+      setIsLoading(false);
     };
     fetchData();
   }, []);
 
   const handleCheckboxChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
-    pref: Prefecture
+    pref: Prefecture,
   ) => {
     if (event.target.checked) {
       const data = await fetchPopulationComposition(pref);
       setSelectedPrefectures((prev) => [...prev, data]);
     } else {
       setSelectedPrefectures((prev) =>
-        prev.filter((p) => p.prefName !== pref.prefName)
+        prev.filter((p) => p.prefName !== pref.prefName),
       );
     }
   };
 
-  return { prefectures, selectedPrefectures, handleCheckboxChange };
+  return { prefectures, selectedPrefectures, handleCheckboxChange, isLoading };
 };

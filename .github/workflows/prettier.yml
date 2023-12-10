@@ -2,7 +2,7 @@ name: Prettier
 on: [pull_request]
 
 env:
-  FILE_PATTERN: "app/*.{ts,tsx}"
+  FILE_PATTERN: "app/**/*.{ts,tsx}"
 
 jobs:
   lint:
